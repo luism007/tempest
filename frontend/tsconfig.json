@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true, // flag fixes default & namespace imports from CommonJS to TS
+        "jsx": "react", // tells TS how to treat JSX files
+        "module": "ESNext", // tells TS how to transpile ES6 imports & exports
+        "moduleResolution": "node",
+        "lib": [ // tells TS which libraries will exist in your target env. 
+            "DOM",
+            "ESNext"
+        ],
+        "strict": true, // enables as TS type checks
+        "sourceMap": true, // enables TS emitting source maps
+        "target": "ESNext", // configures target ES version
+    },
+    "exclude": [ // excludes libs listed from typechecking & transpiling
+        "node_modules"
+    ]
+}
