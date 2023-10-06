@@ -1,4 +1,7 @@
 import {sign, verify} from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import path from 'path';
+dotenv.config({path: path.resolve(__dirname, '../../.env.development')});
 
 const KEY = process.env.SIGN_KEY;
 

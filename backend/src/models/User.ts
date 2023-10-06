@@ -2,15 +2,15 @@ class User {
   username: string;
   email: string;
   password: string;
-  profileId: string;
-  id: string;
+  profileId: string | null;
+  id: string | null;
 
   constructor(
     _username: string,
     _email: string,
     _password: string,
     _profileId: string | null,
-    _id: string
+    _id: string | null
   ) {
     this.username = _username;
     this.email = _email;
