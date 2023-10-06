@@ -7,7 +7,7 @@ import {router as AuthRouter } from './routes/auth-routes';
 
 const port = 8080;
 
-dotenv.config({path: path.resolve(__dirname, '../.env.dev')});
+dotenv.config({path: path.resolve(__dirname, '../.env.development')});
 
 const app: Application = express();
 
