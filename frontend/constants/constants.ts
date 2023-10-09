@@ -1,0 +1,1 @@
+export const validPasswordPattern = new RegExp('([A-Z0-9a-z@!#*:;\'[\]|}{]){1,13}');

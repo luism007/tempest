@@ -8,7 +8,7 @@ const Root = () => {
                 <nav>
                     <ul>
                         <li> <Link to={'/home'}> Home </Link> </li>
-                        <li> <Link to={'/auth'}> Login </Link> </li>
+                        <li> <Link to={'/auth?form=login'}> Login </Link> </li>
                     </ul>
                 </nav>
             </div>

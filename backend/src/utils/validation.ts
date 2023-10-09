@@ -3,5 +3,5 @@ export const isEmailValid = (email: string) => {
 }
 
 export const isPasswordValid = (password: string) => {
-    return password.length >= 15;
+    return password.length >= 13;
 }
