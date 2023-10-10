@@ -6,11 +6,15 @@
   "scripts": {
     "start": "webpack serve --port 3000",
     "build": "NODE_ENV=production webpack",
+    "dev": "webpack-dev-server --env development --mode development --port 3000",
     "test": "jest --config ./jest.config.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.5.1",
+    "dotenv": "^16.3.1",
+    "env-cmd": "^10.1.0",
     "primereact": "^10.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -18,9 +22,11 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/react": "^18.2.25",
     "@types/react-dom": "^18.2.10",
     "css-loader": "^6.8.1",
+    "dotenv-webpack": "^8.0.1",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
     "ts-loader": "^9.4.4",

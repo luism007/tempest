@@ -1,12 +1,13 @@
 const prod = process.env.NODE_ENV === 'production';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const path = require('path');
+const dotenv = require('dotenv-webpack');
 module.exports = {
     mode: prod ? 'production' : 'development',
     entry: './index.tsx',
     output: {
-        path: __dirname + '/dist/',
+        path: path.resolve(__dirname, 'dist'),
     },
     module: {
         rules: [
@@ -30,5 +31,8 @@ module.exports = {
             template: 'index.html',
         }),
         new MiniCssExtractPlugin(),
+        new dotenv({
+            path: `./.env.${this.mode}`
+        })
     ],
 };

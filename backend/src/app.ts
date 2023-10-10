@@ -20,7 +20,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/auth/', AuthRouter);
+app.use('/api/auth/', AuthRouter);
 
 app.listen((port), () => {
     // tslint:disable-next-line:no-console

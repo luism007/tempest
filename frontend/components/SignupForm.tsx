@@ -27,7 +27,7 @@ const isValidPassword = (password: string): boolean => {
     return (password.length >= 13 && password.match(validPasswordPattern) !== null) ? true : false;
 }
 
-const SignUpForm: React.FC<{submit: (email: string, password:string) => void }> = (props) => {
+const SignUpForm: React.FC<{submit: (email: string, password:string, action: string) => void }> = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailValidState, setEmailValidState] = useState(false);
@@ -55,7 +55,7 @@ const SignUpForm: React.FC<{submit: (email: string, password:string) => void }> 
             {
                 readyToSubmit() &&
                 <div className="p-inputgroup flex-1">
-                    <Button label="Submit" onClick={()=> props.submit(email, password)}></Button>
+                    <Button label="Submit" onClick={()=> props.submit(email, password, 'signup')}></Button>
                 </div>
             }
         </>
