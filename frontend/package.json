@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack serve --port 3000",
     "build": "NODE_ENV=production webpack",
-    "dev": "webpack-dev-server --env development --mode development --port 3000",
+    "dev": "NODE_ENV=development webpack-dev-server --env development --mode development --port 3000",
     "test": "jest --config ./jest.config.ts"
   },
   "author": "",
@@ -15,6 +15,7 @@
     "axios": "^1.5.1",
     "dotenv": "^16.3.1",
     "env-cmd": "^10.1.0",
+    "fs": "^0.0.1-security",
     "primereact": "^10.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
