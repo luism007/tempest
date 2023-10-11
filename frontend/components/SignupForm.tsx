@@ -4,7 +4,6 @@ import { Password } from "primereact/password";
 import React, {useState} from "react";
 import { validPasswordPattern } from "../constants/constants";
 import { Button } from "primereact/button";
-import User from "../models/User";
 
 const signupFormPasswordFooter = (
     <>
@@ -30,8 +29,8 @@ const isValidPassword = (password: string): boolean => {
 const SignUpForm: React.FC<{submit: (email: string, password:string, action: string) => void }> = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [emailValidState, setEmailValidState] = useState(false);
-    const [passwordValidState, setPasswordValidState] = useState(false);
+    const [emailValidState, setEmailValidState] = useState(true);
+    const [passwordValidState, setPasswordValidState] = useState(true);
 
     const updateEmailValidState = (state: boolean) =>{
         setEmailValidState(state);
@@ -41,7 +40,7 @@ const SignUpForm: React.FC<{submit: (email: string, password:string, action: str
         setPasswordValidState(state);
     }
     const readyToSubmit = () => {
-        return emailValidState && passwordValidState;
+        return (emailValidState && passwordValidState) && (isValidEmail(email) && isValidPassword(password));
     }
 
     return(
@@ -50,12 +49,11 @@ const SignUpForm: React.FC<{submit: (email: string, password:string, action: str
                 <InputText className = {(emailValidState) ? '' : 'p-invalid'} placeholder="Enter Email" onChange={(e) => { updateEmailValidState(isValidEmail(e.target.value)); setEmail(e.target.value) }}></InputText>
             </div>
             <div className = "p-inputgroup flex-1">
-                <Password className = {(passwordValidState) ? '' : 'p-invalid'} footer = {signupFormPasswordFooter} onChange={(p) => { updatePasswordValidState(isValidPassword(p.target.value)); setPassword(p.target.value) }} toggleMask/>
+                <Password className = {(passwordValidState) ? '' : 'p-invalid'} placeholder = "Enter Password" footer = {signupFormPasswordFooter} onChange={(p) => { updatePasswordValidState(isValidPassword(p.target.value)); setPassword(p.target.value) }} toggleMask/>
             </div>
             {
-                readyToSubmit() &&
                 <div className="p-inputgroup flex-1">
-                    <Button label="Submit" onClick={()=> props.submit(email, password, 'signup')}></Button>
+                    <Button disabled={!readyToSubmit()} label="Create Account" onClick={() => props.submit(email, password, 'signup')}></Button>
                 </div>
             }
         </>

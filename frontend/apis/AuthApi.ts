@@ -9,5 +9,14 @@ export const AuthApi = {
             data: user
         });
         return response.data;
+    },
+
+    login: async (user: User) => {
+        const response = await api.request({
+            url: `/auth/login`,
+            method: 'POST',
+            data: user
+        });
+        return response.data;
     }
 }
