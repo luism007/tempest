@@ -3,7 +3,7 @@ import { hash } from 'bcrypt';
 import { v4 as uuid } from 'uuid';
 import User from '../models/User';
 import UserData from "../models/UserData";
-import { SignUpError } from "../constants/SignUpError";
+import { AuthContract } from "../constants/AuthContract";
 
 
 export const userEmailExists = async(email: string): Promise<boolean> => {
@@ -55,7 +55,7 @@ export const addUser = async (user: User) => {
         await writeUserData(userData);
         return new Promise<User>(resolve => resolve(user));
     } catch (e) {
-        return new SignUpError(user.email, '', 'Failed to add user. Data writing issue.');
+        return new AuthContract(user.email, '', 'Failed to add user. Data writing issue.');
     }
 }
 
