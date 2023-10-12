@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
-import LoginForm from "./LoginForm";
-import SignUpForm from "./SignupForm";
+import LoginForm from "../login/LoginForm";
+import SignUpForm from "../signup/SignupForm";
 import { Link, useSearchParams } from "react-router-dom";
-import User from "../models/User";
-import { AuthApi } from "../apis/AuthApi";
+import User from "../../../models/User";
+import { AuthApi } from "../../../apis/AuthApi";
 import { Toast } from "primereact/toast";
 import './AuthForm.css';
 
@@ -31,7 +31,7 @@ const AuthForm: React.FC<{authMode: string}> = (props) => {
         <div className = "authForm">
             { (isLogin) ? <LoginForm submit={submit}/> : <SignUpForm submit = {submit}/> }
              <Link to={`?form=${isLogin ? 'signup' : 'login'}`}>
-                 {isLogin ? 'Create an Account' : 'Login'}
+                 {isLogin ? 'Don\'t have an account? Create an Account' : 'Already have an account? Login'}
              </Link>
              <Toast ref={toast}/>
         </div>

@@ -1,15 +1,8 @@
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
-import { validPasswordPattern } from "../constants/constants";
+import { isValidEmail, isValidPassword } from "../../../constants/constants";
 import React, { useState } from "react";
 import { Button } from "primereact/button";
-
-const isValidEmail = (email: string): boolean => {
-    return (email.includes('@')) ? true : false;
-}
-const isValidPassword = (password: string): boolean => {
-    return (password.length >= 13 && password.match(validPasswordPattern) !== null) ? true : false;
-}
 
 const LoginForm: React.FC<{ submit: (email: string, password:string, action: string) => void }> = (props) => {
     const [email, setEmail] = useState('');
@@ -38,7 +31,7 @@ const LoginForm: React.FC<{ submit: (email: string, password:string, action: str
                 <Password className={(passwordValidState) ? '' : 'p-invalid'} placeholder='Password' onChange={(p) => { updatePasswordValidState(isValidPassword(p.target.value)); setPassword(p.target.value) }} toggleMask />
             </div>
             {
-                <div className="p-inputgroup flex-1">
+                <div className="p-inputgroup flex-1 button-wrapper">
                     <Button disabled = {!readyToSubmit()} label="Login" onClick={() => props.submit(email, password, 'login')}></Button>
                 </div>
             }

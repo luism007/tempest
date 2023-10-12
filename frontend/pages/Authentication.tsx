@@ -1,7 +1,7 @@
 import React from "react";
 import { Steps } from "primereact/steps";
 import { MenuItem } from "primereact/menuitem";
-import AuthForm from "../components/AuthForm";
+import AuthForm from "../components/auth/auth/AuthForm";
 import './Authentication.css';
 const Authentication = () => {
     const authSteps: MenuItem[] = [{ label: 'Sign Up' }, { label: 'Create Profile' }];

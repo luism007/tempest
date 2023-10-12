@@ -1,0 +1,20 @@
+.authForm { 
+    height: 60%;
+    width: 50%;
+    margin: auto;
+    padding: 5%;
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.authForm > div,
+.authForm > div.button-wrapper > button { 
+    margin: 10px auto;
+}
+
+.authForm > div.button-wrapper > button { 
+    width: 40%;
+}
