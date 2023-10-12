@@ -5,48 +5,54 @@ import { addUser, getUser, userEmailExists } from "./user-service";
 import { createJSONToken } from "../utils/auth";
 
 export const signUpService = async (newUser: User) => {
-    const error: AuthContract = new AuthContract('');
+    const authContract: AuthContract = new AuthContract('');
 
     if (!isEmailValid(newUser.email)) {
-        error.email = 'Invalid email. Please try again'
+        authContract.error = 'Invalid email. Please try again'
     }
 
     const exists = await userEmailExists(newUser.email);
     if (exists) {
-        error.email = 'User with this email already exists.';
+        authContract.error = 'User with this email already exists.';
     }
 
-    if(error.email?.length > 0) return { error };
+    if(authContract.error?.length > 0){
+        return authContract;
+    };
 
     const createdUser = await addUser(newUser);
     const authToken = createJSONToken(createdUser.email);
-    return { user: createdUser, token: authToken };
+
+    authContract.email = createdUser.email;
+    authContract.token = authToken;
+
+    return authContract;
 
 }
 
 export const loginService = async (user: User) => {
     const loginUser = await getUser(user.email);
-    const response = new AuthContract('');
+    const authContract = new AuthContract('');
     if (!loginUser) {
-        response.error = 'No user was found with this email. Please create an account.';
+        authContract.error = 'No user was found with this email. Please create an account.';
     }
 
     const isPwValid = await isPasswordValid(user.password, loginUser.password);
 
     if (!isPwValid) {
-        response.error = 'Incorrect password. Please try again.';
+        authContract.error = 'Incorrect password. Please try again.';
     }
 
-    if (response.error?.length > 0) {
-        return response;
+    if (authContract.error?.length > 0) {
+        return authContract;
     }
     const token = createJSONToken(loginUser.email);
 
-    response.email = loginUser.email;
-    response.message = `${loginUser.email} has logged in!`;
-    response.token = token;
-    response.userId = loginUser.id;
+    authContract.email = loginUser.email;
+    authContract.message = `${loginUser.email} has logged in!`;
+    authContract.token = token;
+    authContract.userId = loginUser.id;
 
 
-    return response;
+    return authContract;
 }

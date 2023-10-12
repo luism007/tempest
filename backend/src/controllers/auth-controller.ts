@@ -6,9 +6,12 @@ export const signUpController = async (req: Request, res: Response, next: NextFu
     try {
         const contract = await AuthService.signUpService(user);
 
-        if (contract.error) return res.send({message: contract.error}).status(401);
+        if (contract.error?.length > 0) {
 
-        return res.send({message: `${contract.user.email} has signed up!`, token: contract.token }).status(200);
+            return res.status(401).send({message: contract.error});
+        }
+
+        return res.send({message: `${contract.email} has signed up!`, token: contract.token }).status(200);
     } catch (e) {
         next(e);
     }
@@ -18,8 +21,9 @@ export const loginController = async (req: Request, res: Response, next: NextFun
     const user = req.body;
     try {
         const contract = await AuthService.loginService(user);
+
         if(contract.error?.length > 0) {
-            return res.send({message: contract.error }).status(401);
+            return res.status(401).send({message: contract.error });
         }
         return res.send({userId: contract.userId, token: contract.token, email: contract.email, message: contract.message }).status(200);
     } catch (e) {

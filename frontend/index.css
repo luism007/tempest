@@ -1,3 +1,18 @@
 body { 
     color: #333;
 }
+
+.tempestNav { 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.tempestNav > ul { 
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+}
+
+.tempestNav > ul > li { 
+    margin: 5px;
+}

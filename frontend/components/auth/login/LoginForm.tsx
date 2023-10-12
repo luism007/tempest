@@ -28,7 +28,7 @@ const LoginForm: React.FC<{ submit: (email: string, password:string, action: str
                 <InputText className={(emailValidState) ? '' : 'p-invalid'} placeholder="Email" onChange={(e) => { updateEmailValidState(isValidEmail(e.target.value)); setEmail(e.target.value) }}></InputText>
             </div>
             <div className="p-inputgroup flex-1">
-                <Password className={(passwordValidState) ? '' : 'p-invalid'} placeholder='Password' onChange={(p) => { updatePasswordValidState(isValidPassword(p.target.value)); setPassword(p.target.value) }} toggleMask />
+                <Password className={(passwordValidState) ? '' : 'p-invalid'} placeholder='Password' feedback = {false} onChange={(p) => { updatePasswordValidState(isValidPassword(p.target.value)); setPassword(p.target.value) }} toggleMask />
             </div>
             {
                 <div className="p-inputgroup flex-1 button-wrapper">
