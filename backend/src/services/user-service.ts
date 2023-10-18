@@ -59,17 +59,16 @@ export const addUser = async (user: User) => {
     }
 }
 
-export const updateUserProfileId = async (user: User, profileId: string) => {
-    const userData = await readUserData();
-    const users = [...userData.users];
+export const updateUserProfileId = async (userId: string, profileId: string) => {
+  const userData = await readUserData();
+  const users = [...userData.users];
 
-    for (const usr of users){
-        if (usr.id === user.id) {
-            usr.profileId = profileId;
-            return;
-        }
+  for (const usr of users) {
+    if (usr.id === userId) {
+      usr.profileId = profileId;
+      break;
     }
-
-    const updatedUsers: UserData = new UserData(users);
-    await writeUserData(updatedUsers);
+  }
+  const updatedUsers: UserData = new UserData(users);
+  await writeUserData(updatedUsers);
 }

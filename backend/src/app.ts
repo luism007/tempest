@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 import {router as AuthRouter } from './routes/auth-routes';
+import { router as ProfileRouter } from './routes/profile-routes';
 
 const port = 8080;
 
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/auth/', AuthRouter);
+app.use('/api/profile/', ProfileRouter);
 
 app.listen((port), () => {
     // tslint:disable-next-line:no-console
