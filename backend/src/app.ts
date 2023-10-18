@@ -3,9 +3,9 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import path from 'path';
 
-import {router as AuthRouter } from './routes/auth-routes';
+import { router as AuthRouter } from './routes/auth-routes';
 import { router as ProfileRouter } from './routes/profile-routes';
-
+import { router as GymRouter } from './routes/gym-routes';
 const port = 8080;
 
 dotenv.config({path: path.resolve(__dirname, '../.env.development')});
@@ -21,8 +21,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/auth/', AuthRouter);
-app.use('/api/profile/', ProfileRouter);
+app.use("/api/auth/", AuthRouter);
+app.use("/api/profile/", ProfileRouter);
+app.use("/api/gyms/", GymRouter);
 
 app.listen((port), () => {
     // tslint:disable-next-line:no-console

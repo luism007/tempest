@@ -3,6 +3,7 @@ class Gym {
   city: string;
   street: string;
   zip: number;
+  type: string;
   description: string;
   id: string;
 
@@ -11,6 +12,7 @@ class Gym {
     _city: string,
     _street: string,
     _zip: number,
+    _type: string,
     _description: string,
     _id: string
   ) {
@@ -18,6 +20,7 @@ class Gym {
     this.city = _city;
     this.street = _street;
     this.zip = _zip;
+    this.type = _type;
     this.description = _description;
     this.id = _id;
   }
