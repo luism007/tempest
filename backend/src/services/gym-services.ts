@@ -31,3 +31,18 @@ export const addGym = async(gym: Gym) => {
     }
 
 }
+
+export const getGymsByType = async (type: string) => {
+    const gymData = await readGymData();
+    if (!gymData) {
+        throw new Error('No gym data can be found at this time.');
+    }
+
+    if (gymData.gyms?.length === 0) {
+        gymData.gyms = [];
+    }
+
+    const gyms = gymData.gyms.filter((g: Gym) => g.type === type);
+
+    return new Promise<Gym[]>(resolve => resolve(gyms));
+}
