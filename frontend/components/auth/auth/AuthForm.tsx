@@ -13,7 +13,7 @@ const AuthForm: React.FC<{authMode: string}> = (props) => {
     const [searchParams] = useSearchParams();
     const isLogin = () => { 
         const mode = searchParams.get('form');
-        if (mode === null ) { 
+        if (mode === null || mode === 'login') { 
             return true;
         } else if (mode !== 'login') { 
             return false;
