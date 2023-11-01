@@ -1,6 +1,6 @@
 import Membership from "./Membership";
 
-class MembershipData { 
+class MembershipData {
     memberships: Membership[] | null;
     contstructor(
         _memberships?: Membership[]

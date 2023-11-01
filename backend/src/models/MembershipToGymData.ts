@@ -1,4 +1,4 @@
-class MembershipToGymData { 
+class MembershipToGymData {
     membershipId: string;
     gymId: string;
 

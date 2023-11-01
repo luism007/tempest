@@ -1,4 +1,4 @@
-class TraineesToMembershipData { 
+class TraineesToMembershipData {
     traineeId: string;
     membershipId: string;
 
