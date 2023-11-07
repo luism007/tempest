@@ -83,8 +83,6 @@ export const createMembership = async (membership: Membership, gymId: string) =>
     }
 
     membershipData.memberships = [...membershipData.memberships, membership];
-       // tslint:disable-next-line:no-console
-       console.log('Here', new MembershipToGymData(membership.id,gymId));
     membershipGymRelations = [ ...membershipGymRelations, new MembershipToGymData(membership.id,gymId) ]
 
     try {

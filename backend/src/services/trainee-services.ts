@@ -30,3 +30,12 @@ export const addTrainee = async (trainee: Trainee, profileId: string) => {
         throw new Error(`Unable to create profile: ${e}`);
     }
 }
+
+export const getTrainees = async ()=> {
+    const traineeData: TraineeData = await readTraineeData();
+    if (traineeData.trainees?.length <= 0 || traineeData === null) {
+        throw new Error('No trainee data found. Please try again.');
+    }
+
+    return new Promise<Trainee[]>(resolve => resolve(traineeData.trainees));
+}
