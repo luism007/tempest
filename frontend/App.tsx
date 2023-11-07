@@ -9,6 +9,7 @@ import Authentication from './pages/Authentication';
 //theme
 import "primereact/resources/themes/lara-light-blue/theme.css";
 import { checkAuthLoader, tokenLoader } from './utils/auth';
+import ProfileSetup from './pages/ProfileSetup';
         
 const router = createBrowserRouter([
     {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/createProfile',
-                element: <div><h1>Create Profile!</h1></div>,
+                element: <ProfileSetup/>,
                 loader: checkAuthLoader
             }
         ]

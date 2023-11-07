@@ -4,7 +4,7 @@ import { api } from "./configs/AxiosConfig";
 export const AuthApi = {
     signUp: async (user: User) => {
         const response = await api.request({
-            url: `/auth/signup`,
+            url: `api/auth/signup`,
             method: 'POST',
             data: user
         });
@@ -13,7 +13,7 @@ export const AuthApi = {
 
     login: async (user: User) => {
         const response = await api.request({
-            url: `/auth/login`,
+            url: `api/auth/login`,
             method: 'POST',
             data: user
         });
