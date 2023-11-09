@@ -11,6 +11,7 @@
         "strict": true, // enables as TS type checks
         "sourceMap": true, // enables TS emitting source maps
         "target": "ESNext", // configures target ES version
+        "noImplicitAny": false,
     },
     "exclude": [ // excludes libs listed from typechecking & transpiling
         "node_modules"
