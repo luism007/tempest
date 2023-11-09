@@ -57,7 +57,8 @@ class ProfileSetupForm {
 
 export const ProfileSetupContext = createContext({
     form: {},
-    handleProfileSetupNext: (profileForm: Partial<ProfileSetupForm>) => {}
+    handleProfileSetupNext: (profileForm: Partial<ProfileSetupForm>) => {},
+    handleTraineeSetupNext: (traineeForm: Partial<ProfileSetupForm>) => {}
 });
 
 
@@ -72,8 +73,18 @@ const profileSetupContextReducer = (state: any, action: any) => {
                 profileType: action.form.profileType,
                 ...state
             }
-            console.log('New State', newState);
+            console.log(newState);
             return newState;
+        case 'TRAINEE_NEXT':
+            const tState = {
+                ...state,
+                height: action.form.height,
+                weight: action.form.weight,
+                age: action.form.age,
+                dob: action.form.dob
+            };
+            console.log(tState);
+            return tState; 
         default:
             return state;
     }
@@ -94,9 +105,22 @@ export default function ProfileSetupContextProvider ({children}) {
         });
     }
 
+    const handleTraineeSetupNext = (traineeForm: Partial<ProfileSetupForm>) => {
+        dispatch({
+            type: 'TRAINEE_NEXT',
+            form : {
+                height: traineeForm.height,
+                weight: traineeForm.weight,
+                age: traineeForm.age,
+                dob: traineeForm.dob
+            }
+        })
+    }
+
     const contextValue = {
-        form: {},
-        handleProfileSetupNext: handleProfileSetupNext
+        form: state,
+        handleProfileSetupNext: handleProfileSetupNext,
+        handleTraineeSetupNext: handleTraineeSetupNext
     };
 
     return <ProfileSetupContext.Provider value = {contextValue}> { children } </ProfileSetupContext.Provider>

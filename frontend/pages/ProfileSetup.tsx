@@ -27,7 +27,7 @@ const CreateProfile = () => {
     const dropdownOptions = ['Trainer', 'Trainee'];
     const profileSetupContext = useContext(ProfileSetupContext);
 
-    const submit = (e) => {
+    const submit = () => {
         profileSetupContext.handleProfileSetupNext(formState)
     }
 
@@ -45,15 +45,38 @@ const CreateProfile = () => {
             <InputText name = "firstName"   required placeholder = "First Name" keyfilter= "alpha" onChange={handleInputChange}/>
             <InputText name = "lastName"    required placeholder = "Last Name" keyfilter= "alpha" onChange={handleInputChange} />
             <Dropdown  name = "profileType" required placeholder = "Profile Type" options={dropdownOptions} onChange={ handleDropdownChange } value={elementValue}/>
-            <Button    name = "profileNext" label="Login" disabled = {(!valid) ? true : false}/>
+            <Button    name = "profileNext" label="Next" disabled = {(!valid) ? true : false}/>
         </form>
     );
 }
 
 const CreateTrainee = () => {
+    const profileSetupContext = useContext(ProfileSetupContext);
+    const rules = new Map<string, Rule>();
+
+    rules.set('height', {validation: new RegExp(/^$/), required: true});
+    rules.set('age', {validation: new RegExp(/^$/), required: true});
+    rules.set('weight', {validation: new RegExp(/^$/), required: true});
+    rules.set('dob', {validation: new RegExp(/^$/), required: true});
+
+    const submit = () => {
+        profileSetupContext.handleTraineeSetupNext(formState);
+    }
+
+    const {valid, formState, handleSubmit, handleInputChange } = useForm(submit, rules);
+
+
     return(
         <>
             <h1> Setup Your Trainee Profile </h1>
+            <form onSubmit={handleSubmit}>
+                <InputText name = "height" required  keyfilter= "int" placeholder = "Enter Height (cm)" onChange = { handleInputChange } />
+                <InputText name = "weight" required  keyfilter= "int" placeholder = "Enter Weight (lbs)" onChange = { handleInputChange } />
+                <InputText name = "age" required  keyfilter= "int" placeholder = "Enter Age" onChange = { handleInputChange } />
+                <InputText name = "dob" required  placeholder = "Enter DOB (mm/dd/yyyy)" onChange = { handleInputChange } />
+                <Button name = "traineeNext" label = "Next" disabled = {(!valid) ? true : false }/>
+            </form>
+
         </>
     )
 }
