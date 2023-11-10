@@ -25,10 +25,10 @@ const ProfileSetup = () => {
 
 const CreateProfile = () => {
     const dropdownOptions = ['Trainer', 'Trainee'];
-    const profileSetupContext = useContext(ProfileSetupContext);
+    const {form, handleProfileSetupNext} = useContext(ProfileSetupContext);
 
     const submit = () => {
-        profileSetupContext.handleProfileSetupNext(formState)
+        handleProfileSetupNext(formState)
     }
 
 
@@ -51,7 +51,7 @@ const CreateProfile = () => {
 }
 
 const CreateTrainee = () => {
-    const profileSetupContext = useContext(ProfileSetupContext);
+    const { form, handleTraineeSetupNext } = useContext(ProfileSetupContext);
     const rules = new Map<string, Rule>();
 
     rules.set('height', {validation: new RegExp(/^$/), required: true});
@@ -60,7 +60,7 @@ const CreateTrainee = () => {
     rules.set('dob', {validation: new RegExp(/^$/), required: true});
 
     const submit = () => {
-        profileSetupContext.handleTraineeSetupNext(formState);
+        handleTraineeSetupNext(formState);
     }
 
     const {valid, formState, handleSubmit, handleInputChange } = useForm(submit, rules);

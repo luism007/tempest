@@ -64,16 +64,14 @@ export const ProfileSetupContext = createContext({
 
 
 const profileSetupContextReducer = (state: any, action: any) => {
-
     switch(action.type) {
         case 'PROFILE_NEXT':
             const newState = {
+                ...state,
                 firstName: action.form.firstName,
                 lastName: action.form.lastName,
-                profileType: action.form.profileType,
-                ...state
+                profileType: action.form.profileType
             }
-            console.log(newState);
             return newState;
         case 'TRAINEE_NEXT':
             const tState = {
@@ -83,7 +81,6 @@ const profileSetupContextReducer = (state: any, action: any) => {
                 age: action.form.age,
                 dob: action.form.dob
             };
-            console.log(tState);
             return tState; 
         default:
             return state;
