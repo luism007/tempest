@@ -3,29 +3,38 @@ import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { MenuItem } from "primereact/menuitem";
 import { Steps } from "primereact/steps";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "../hooks/useForm";
 import ProfileSetupContextProvider from "../store/ProfileSetupStore";
 import { ProfileSetupContext } from "../store/ProfileSetupStore";
 import { useMultistepper } from "../hooks/useMultistepper";
 const ProfileSetup = () => {
 
-    const [setupSteps, setSetupSteps] = useState([{label: 'Setup Profile'}]);
-    const components = [<CreateProfile/>, <CreateTrainee/>, <SelectGym/>, <SelectMembership/> ]
-
     return (
         <ProfileSetupContextProvider>
-            <Steps model={setupSteps}/>
             <ProfileSetupWrapper/>
         </ProfileSetupContextProvider>
     )
 }
 
 const ProfileSetupWrapper = () => {
+    const [labels, setLabels] = useState([{label: 'Setup Profile'}]);
     const components = [<CreateProfile/>, <CreateTrainee/>, <SelectGym/>, <SelectMembership/> ]
     const {step, nextStep, backStep } = useMultistepper(components);
+    const { form } = useContext(ProfileSetupContext);
+
+    useEffect(() => {
+        if (step === 0 ) {
+            const profileType = form['profileType'];
+            if (profileType === 'Trainee') { 
+                setLabels([...labels, {label: 'Setup Trainee'}]);
+            }
+        }
+    }, [form])
+
     return (
         <>
+            <Steps model={labels} activeIndex={step}/>
             <span> { step} </span> <span> / </span> <span> { components.length } </span>
             {components[step]}
             { step < components.length - 1 && <Button onClick={nextStep}> Next </Button> } 
