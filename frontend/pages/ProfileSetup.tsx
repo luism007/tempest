@@ -7,18 +7,30 @@ import React, { useContext, useState } from "react";
 import { useForm } from "../hooks/useForm";
 import ProfileSetupContextProvider from "../store/ProfileSetupStore";
 import { ProfileSetupContext } from "../store/ProfileSetupStore";
+import { useMultistepper } from "../hooks/useMultistepper";
 const ProfileSetup = () => {
 
     const [setupSteps, setSetupSteps] = useState([{label: 'Setup Profile'}]);
+    const components = [<CreateProfile/>, <CreateTrainee/>, <SelectGym/>, <SelectMembership/> ]
 
     return (
         <ProfileSetupContextProvider>
             <Steps model={setupSteps}/>
-            <CreateProfile/>
-            <CreateTrainee/>
-            <SelectGym/>
-            <SelectMembership/>
+            <ProfileSetupWrapper/>
         </ProfileSetupContextProvider>
+    )
+}
+
+const ProfileSetupWrapper = () => {
+    const components = [<CreateProfile/>, <CreateTrainee/>, <SelectGym/>, <SelectMembership/> ]
+    const {step, nextStep, backStep } = useMultistepper(components);
+    return (
+        <>
+            <span> { step} </span> <span> / </span> <span> { components.length } </span>
+            {components[step]}
+            { step < components.length - 1 && <Button onClick={nextStep}> Next </Button> } 
+            { step > 0 && <Button onClick={backStep}> Back </Button>} 
+        </>
     )
 }
 
