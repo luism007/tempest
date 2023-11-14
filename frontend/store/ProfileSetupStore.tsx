@@ -62,7 +62,6 @@ export const ProfileSetupContext = createContext({
 });
 
 
-
 const profileSetupContextReducer = (state: any, action: any) => {
     switch(action.type) {
         case 'PROFILE_NEXT':
