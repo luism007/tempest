@@ -16,12 +16,12 @@ export const createGym = async(req: Request, res: Response, next: NextFunction) 
 }
 
 export const getGymsOfType = async(req: Request, res: Response, next: NextFunction) => {
-    const type = req.body;
-    getGymsByType(type.type)
+    const type = req.query.type as string;
+    getGymsByType(type)
     .then((gyms) => {
-        res.send({message: `All ${type.type} gyms returned!`, gyms}).status(200);
+        res.send({message: `All ${type} gyms returned!`, gyms}).status(200);
     })
     .catch((e) => {
-        res.send({message: `No ${type.type} can be found. Error: ${e}`}).status(400);
+        res.send({message: `No ${type} can be found. Error: ${e}`}).status(400);
     })
 }

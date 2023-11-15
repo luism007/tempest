@@ -58,7 +58,8 @@ class ProfileSetupForm {
 export const ProfileSetupContext = createContext({
     form: {},
     handleProfileSetupNext: (profileForm: Partial<ProfileSetupForm>) => {},
-    handleTraineeSetupNext: (traineeForm: Partial<ProfileSetupForm>) => {}
+    handleTraineeSetupNext: (traineeForm: Partial<ProfileSetupForm>) => {},
+    handleGymSetupNext: (gymForm: Partial<ProfileSetupForm>) => {}
 });
 
 
@@ -80,7 +81,18 @@ const profileSetupContextReducer = (state: any, action: any) => {
                 age: action.form.age,
                 dob: action.form.dob
             };
-            return tState; 
+            return tState;
+        case 'GYM_NEXT':
+            const gState = {
+                ...state,
+                gymName: action.form.gymName,
+                gymType: action.form.gymType,
+                gymCity: action.form.gymCity,
+                gymStreet: action.form.gymStreet,
+                gymZip: action.form.gymZip,
+                gymDescription: action.form.gymDescription
+            }
+            return gState;
         default:
             return state;
     }
@@ -113,10 +125,25 @@ export default function ProfileSetupContextProvider ({children}) {
         })
     }
 
+    const handleGymSetupNext = (gymForm: Partial<ProfileSetupForm>) => {
+        dispatch({
+            type: 'GYM_NEXT',
+            form: {
+                gymName: gymForm.gymName,
+                gymType: gymForm.gymType,
+                gymCity: gymForm.gymCity,
+                gymStreet: gymForm.gymStreet,
+                gymZip: gymForm.gymZip,
+                gymDescription: gymForm.gymDescription
+            }
+        })
+    }
+
     const contextValue = {
         form: state,
         handleProfileSetupNext: handleProfileSetupNext,
-        handleTraineeSetupNext: handleTraineeSetupNext
+        handleTraineeSetupNext: handleTraineeSetupNext,
+        handleGymSetupNext: handleGymSetupNext
     };
 
     return <ProfileSetupContext.Provider value = {contextValue}> { children } </ProfileSetupContext.Provider>
