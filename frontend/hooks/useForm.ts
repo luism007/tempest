@@ -3,7 +3,7 @@ import { useState } from "react"
 
 type FormElement = { 
     field: string;
-    value: any;
+    touched: boolean;
 }
 
 export const useForm = (submitCallback: Function, rules: Map<string, Rule>) => {
@@ -11,7 +11,7 @@ export const useForm = (submitCallback: Function, rules: Map<string, Rule>) => {
     const [valid, setValid] = useState(false);
     const [formState, setFormState] = useState({});
     const [elementValue, setElementValue] = useState('');
-
+    const [formPrestinity, setFormPrestinity] = useState<Map<string, FormElement>>(new Map())
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>){
         const field = e.target.getAttribute('name') as string;
@@ -38,21 +38,33 @@ export const useForm = (submitCallback: Function, rules: Map<string, Rule>) => {
         }
 
         setFormState({...formState, [field]: value });
+        console.log('Form State', formState);
         setElementValue(value);
     }
-
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault();
         if (submitCallback instanceof Function) submitCallback();
     }
+
+    function handleTouch(field) {
+      formPrestinity.set(field, { field: field, touched: true });
+      setFormPrestinity(formPrestinity);
+    }
+
+    function getFormFieldPristinity (field) { 
+        const formItem = formPrestinity.get(field);
+        return formItem?.touched;
+    }
     
     return {
       valid,
       formState,
+      handleTouch,
       elementValue,
+      handleSubmit,
       handleInputChange,
       handleDropdownChange,
-      handleSubmit
+      getFormFieldPristinity
     };
 }

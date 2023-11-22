@@ -38,5 +38,8 @@ module.exports = (env)=> {
           path: `./.env.${process.env.NODE_ENV}`,
         })
       ],
+      devServer: {
+        historyApiFallback: true
+      }
     };
 };

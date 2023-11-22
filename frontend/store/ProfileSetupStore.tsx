@@ -10,11 +10,12 @@ class ProfileSetupForm {
     weight!: number;
     age!: number;
     dob!: string;
+    gymId!: string;
     gymName!: string;
     gymType!: string;
     gymCity!: string;
     gymStreet!: string;
-    gymZip!: string;
+    gymZip!: number;
     gymDescription!: string;
     membershipName!: string;
     membershipType!: string;
@@ -27,11 +28,12 @@ class ProfileSetupForm {
         _weight: number,
         _age: number,
         _dob: string,
+        _gymId: string,
         _gymName: string,
         _gymType: string,
         _gymCity: string,
         _gymStreet: string,
-        _gymZip: string,
+        _gymZip: number,
         _gymDescription: string,
         _membershipName: string,
         _membershipType: string
@@ -43,6 +45,7 @@ class ProfileSetupForm {
         this.weight = _weight;
         this.age = _age;
         this.dob = _dob;
+        this.gymId = _gymId;
         this.gymName = _gymName;
         this.gymType = _gymType;
         this.gymCity = _gymCity;
@@ -85,6 +88,7 @@ const profileSetupContextReducer = (state: any, action: any) => {
         case 'GYM_NEXT':
             const gState = {
                 ...state,
+                gymId: action.form.gymId,
                 gymName: action.form.gymName,
                 gymType: action.form.gymType,
                 gymCity: action.form.gymCity,
@@ -129,6 +133,7 @@ export default function ProfileSetupContextProvider ({children}) {
         dispatch({
             type: 'GYM_NEXT',
             form: {
+                gymId: gymForm.gymId,
                 gymName: gymForm.gymName,
                 gymType: gymForm.gymType,
                 gymCity: gymForm.gymCity,

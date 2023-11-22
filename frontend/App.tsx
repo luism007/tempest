@@ -1,6 +1,6 @@
 import React from 'react'
 import { PrimeReactProvider} from 'primereact/api';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { action as logoutAction } from './components/auth/logout/Logout';
 import Root from './routes/Root';
 import Home from './pages/Home';
@@ -36,6 +36,10 @@ const router = createBrowserRouter([
                 path: '/createProfile',
                 element: <ProfileSetup/>,
                 loader: checkAuthLoader
+            },
+            {
+                path: '/*',
+                element: <Navigate to="/"/>
             }
         ]
     }

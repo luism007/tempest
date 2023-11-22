@@ -10,8 +10,15 @@ import { SelectMembership } from "./SelectMembership";
 
 export const ProfileSetupWrapper = () => {
     const [labels, setLabels] = useState([{label: 'Setup Profile'}]);
-    const components = [<CreateProfile/>, <CreateTrainee/>, <SelectGym/>, <SelectMembership/> ]
+
+    const handleNext = () => {
+        nextStep();
+    }
+    
+    const components = [<CreateProfile handleNext={handleNext}/>, <CreateTrainee/>, <SelectGym/>, <SelectMembership/> ]
     const {step, nextStep, backStep } = useMultistepper(components);
+    
+
     const { form } = useContext(ProfileSetupContext);
 
     useEffect(() => {
@@ -28,7 +35,7 @@ export const ProfileSetupWrapper = () => {
             <Steps model={labels} activeIndex={step}/>
             <span> { step} </span> <span> / </span> <span> { components.length } </span>
             {components[step]}
-            { step < components.length - 1 && <Button onClick={nextStep}> Next </Button> } 
+            {/* { step < components.length - 1 && <Button onClick={nextStep}> Next </Button> }  */}
             { step > 0 && <Button onClick={backStep}> Back </Button>} 
         </>
     )
